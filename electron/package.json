@@ -1,0 +1,32 @@
+{
+  "name": "velora-desktop",
+  "version": "1.0.0",
+  "description": "Velora Desktop Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.7"
+  },
+  "devDependencies": {
+    "electron": "^29.1.5",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.velora.desktop",
+    "productName": "Velora",
+    "mac": {
+      "category": "public.app-category.social-networking"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
