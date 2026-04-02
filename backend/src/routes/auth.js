@@ -12,6 +12,12 @@ router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
     
+    // Field Validation
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'Please provide name, email, and password' });
+    }
+
+    
     // Check if user exists
     const existing = await query(`SELECT * FROM users WHERE email = ?`, [email]);
     if (existing.length > 0) return res.status(400).json({ error: 'User already exists' });

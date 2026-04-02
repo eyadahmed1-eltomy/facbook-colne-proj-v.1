@@ -43,8 +43,8 @@ export default function Register() {
           {error && <div style={{ color: '#ff6b6b', background: 'rgba(255,107,107,0.1)', padding: '10px', borderRadius: '4px', marginBottom: '16px', fontSize: '0.9rem', textAlign: 'center' }}>{error}</div>}
 
           <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
-            <input placeholder="First name" value={form.firstName} onChange={(e) => update('firstName', e.target.value)} required id="reg-first" />
-            <input placeholder="Last name"  value={form.lastName}  onChange={(e) => update('lastName',  e.target.value)} required id="reg-last" />
+            <input placeholder="First name" value={form.firstName} onChange={(e) => update('firstName', e.target.value)} required id="reg-first" style={{ flex: 1 }} />
+            <input placeholder="Last name"  value={form.lastName}  onChange={(e) => update('lastName',  e.target.value)} required id="reg-last" style={{ flex: 1 }} />
           </div>
           <div className="form-group">
             <input type="email" placeholder="Email address" value={form.email} onChange={(e) => update('email', e.target.value)} required id="reg-email" />
