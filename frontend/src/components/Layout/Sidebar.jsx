@@ -10,6 +10,7 @@ export default function Sidebar() {
     { icon: '🏠', label: 'News Feed', path: '/' },
     { icon: '💬', label: 'Messenger', path: '/messages' },
     { icon: '🎬', label: 'Reels', path: '/reels' },
+    { icon: '👥', label: 'Friends', path: '/friends' },
     { icon: '👥', label: 'Groups', path: '/groups' },
     { icon: '🏪', label: 'Marketplace', path: '/marketplace' },
     { icon: '📄', label: 'Pages', path: '/pages' },
@@ -33,7 +34,7 @@ export default function Sidebar() {
   const isActive = (path) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   return (
-    <aside className="w-80 h-[calc(100vh-56px)] sticky top-14 overflow-y-auto p-2 bg-(--bg-primary) hidden xl:block border-r border-(--border)">
+    <aside className="w-80 h-[calc(100vh-56px)] sticky top-14 overflow-y-auto p-2 bg-(--bg-primary) block border-r border-(--border)">
       <div className="flex flex-col gap-0.5">
         <button
           className={`flex items-center w-full p-2.5 rounded-lg hover:bg-white/5 transition-all mb-1 ${location.pathname === '/profile' ? 'bg-white/10' : ''}`}

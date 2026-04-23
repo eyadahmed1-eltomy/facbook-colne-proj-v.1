@@ -245,12 +245,20 @@ export default function Profile() {
                 <button className="bg-white/5 hover:bg-white/10 text-white px-4 py-2.5 rounded-lg font-bold text-[0.9rem] transition-all border border-white/5">👁️ View As</button>
               </>
             ) : (
-              <button 
-                onClick={toggleFollow}
-                className={`px-8 py-2.5 rounded-lg font-bold text-[0.9rem] transition-all shadow-lg ${isFollowing ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10' : 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-600/20'}`}
-              >
-                {isFollowing ? '✓ Following' : 'Follow'}
-              </button>
+              <>
+                <button 
+                  onClick={toggleFollow}
+                  className={`px-8 py-2.5 rounded-lg font-bold text-[0.9rem] transition-all shadow-lg ${isFollowing ? 'bg-white/5 border border-white/10 text-white hover:bg-white/10' : 'bg-purple-600 hover:bg-purple-500 text-white shadow-purple-600/20'}`}
+                >
+                  {isFollowing ? '✓ Following' : 'Follow'}
+                </button>
+                <button 
+                  onClick={() => navigate(`/messages?userId=${targetId}`)}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-lg font-bold text-[0.9rem] flex items-center gap-2 transition-all shadow-lg shadow-blue-600/20"
+                >
+                  💬 Message
+                </button>
+              </>
             )}
             <button className="w-10 h-10 bg-white/5 hover:bg-white/10 flex items-center justify-center rounded-lg text-white border border-white/5 transition-all">⋯</button>
           </div>

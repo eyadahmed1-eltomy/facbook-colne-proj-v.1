@@ -21,13 +21,13 @@ export default function Layout() {
     <>
       <Navbar />
       <div className="flex bg-(--bg-primary) min-h-[calc(100vh-56px)]">
-        {/* {hideSidebars && <Sidebar />} */}
-        <Sidebar />
+        {!hideSidebars && <Sidebar />}
+        {/* <Sidebar /> */}
         <main className={`flex-1 min-h-[calc(100vh-56px)] overflow-x-hidden ${isMessagesPage || isSettingsPage ? '' : 'xl:p-4'} ${isReelsPage ? 'bg-black' : ''}`}>
           <Outlet />
         </main>
-        <RightSidebar />
-        {/* {!hideSidebars && <RightSidebar />} */}
+        {/* <RightSidebar /> */}
+        {!hideSidebars && <RightSidebar />}
       </div>
     </>
   );

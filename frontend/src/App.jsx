@@ -16,6 +16,7 @@ import PrivacyCenter from './pages/PrivacyCenter';
 import Reels from './pages/Reels';
 import Stories from './pages/Stories';
 import PhotoViewer from './pages/PhotoViewer';
+import FindFriends from './pages/FindFriends';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="reels" element={<Reels />} />
           <Route path="stories" element={<Stories />} />
           <Route path="photo/:id" element={<PhotoViewer />} />
+          <Route path="friends" element={<FindFriends />} />
         </Route>
       </Routes>
     </>

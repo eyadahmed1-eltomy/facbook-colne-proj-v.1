@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../firebase/config';
 
 const AuthContext = createContext(null);
 
@@ -83,6 +85,54 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const loginWithGoogle = async () => {
+    try {
+      // Open Google sign-in popup via Firebase
+      const result = await signInWithPopup(auth, provider);
+      const firebaseUser = result.user;
+
+      // Send Firebase user info to our backend to create/find local user
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: firebaseUser.email,
+          name: firebaseUser.displayName,
+          photoURL: firebaseUser.photoURL,
+          uid: firebaseUser.uid,
+        }),
+      });
+
+      if (!res.ok) {
+        let errorMessage = 'Google login failed';
+        try {
+          const errorData = await res.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch (e) {
+          console.error('Failed to parse error response:', e);
+        }
+        throw new Error(errorMessage);
+      }
+
+      const data = await res.json();
+      if (!data.token || !data.user) {
+        throw new Error('Invalid response structure from server');
+      }
+
+      localStorage.setItem('velora_token', data.token);
+      localStorage.setItem('velora_persist_login', 'true');
+      setUser(data.user);
+      setIsAuthenticated(true);
+      return true;
+    } catch (error) {
+      // Re-throw with a user-friendly message
+      if (error.code === 'auth/popup-closed-by-user') {
+        throw new Error('Sign-in cancelled. You closed the popup.');
+      }
+      throw error;
+    }
+  };
+
   const register = async (userData, shouldPersist = false) => {
     try {
       const res = await fetch('/api/auth/register', {
@@ -160,6 +210,7 @@ export function AuthProvider({ children }) {
       isAuthenticated,
       loading,
       login,
+      loginWithGoogle,
       register,
       logout,
       refreshUser,

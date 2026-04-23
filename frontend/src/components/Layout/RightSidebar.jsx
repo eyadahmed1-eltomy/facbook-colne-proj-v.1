@@ -5,7 +5,7 @@ export default function RightSidebar() {
   const offlineUsers = users.filter((u) => !u.online);
 
   return (
-    <aside className="w-80 h-[calc(100vh-56px)] sticky top-14 overflow-y-auto p-4 bg-(--bg-primary) hidden xl:block border-l border-(--border)">
+    <aside className="w-80 h-[calc(100vh-56px)] sticky top-14 overflow-y-auto p-4 bg-(--bg-primary) block border-l border-(--border)">
       <div className="bg-linear-to-br from-purple-500/10 to-pink-500/5 rounded-xl p-4 mb-6 border border-purple-500/10">
         <div className="text-[0.82rem] font-bold text-white mb-1.5 flex items-center gap-2">🎂 Birthdays</div>
         <div className="text-[0.82rem] text-gray-400 leading-normal">
