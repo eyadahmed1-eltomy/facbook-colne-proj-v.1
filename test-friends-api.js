@@ -5,7 +5,7 @@ async function testFriendsAPI() {
   // Test 1: Health check
   console.log('1️⃣ Testing health endpoint...');
   try {
-    const healthRes = await fetch('http://localhost:5000/api/health');
+    const healthRes = await fetch('https://vel0ra.vercel.app/api/health');
     console.log('✅ Backend is running:', healthRes.status);
   } catch (e) {
     console.error('❌ Backend not responding:', e.message);
@@ -16,7 +16,7 @@ async function testFriendsAPI() {
   console.log('\n2️⃣ Testing login to get token...');
   let token = null;
   try {
-    const loginRes = await fetch('http://localhost:5000/api/auth/login', {
+    const loginRes = await fetch('https://vel0ra.vercel.app/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: 'user1@example.com', password: 'password123' })
@@ -31,7 +31,7 @@ async function testFriendsAPI() {
       
       // Try another user
       console.log('   Trying another email...');
-      const loginRes2 = await fetch('http://localhost:5000/api/auth/login', {
+      const loginRes2 = await fetch('https://vel0ra.vercel.app/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: 'john@example.com', password: 'password123' })
@@ -54,7 +54,7 @@ async function testFriendsAPI() {
   // Test 3: Friends API
   console.log('\n3️⃣ Testing /api/friends/all...');
   try {
-    const friendsRes = await fetch('http://localhost:5000/api/friends/all', {
+    const friendsRes = await fetch('https://vel0ra.vercel.app/api/friends/all', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     console.log('📊 Response status:', friendsRes.status);

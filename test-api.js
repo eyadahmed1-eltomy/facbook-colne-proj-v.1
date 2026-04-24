@@ -4,7 +4,7 @@ const crypto = require('crypto');
 async function testAPI() {
   try {
     // Login
-    const loginRes = await fetch('http://localhost:5000/api/auth/login', {
+    const loginRes = await fetch('https://vel0ra.vercel.app/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -25,7 +25,7 @@ async function testAPI() {
     console.log('Token:', token.substring(0, 20) + '...');
     
     // Now test friends API
-    const friendsRes = await fetch('http://localhost:5000/api/friends/all', {
+    const friendsRes = await fetch('https://vel0ra.vercel.app/api/friends/all', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     
