@@ -40,18 +40,18 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0e27] flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-bg-primary flex items-center justify-center p-6 relative overflow-hidden">
       {/* Background Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none animate-pulse duration-700" />
+      <div className="absolute top-[-10%] left-[-10%] w-125 h-125 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-100 h-100 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none animate-pulse duration-700" />
 
-      <div className="max-w-[1000px] w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-250 w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
         {/* Branding Side */}
         <div className="text-center md:text-left space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
            <h1 className="text-7xl font-black text-white tracking-tighter uppercase italic select-none">
              Velora<span className="text-purple-600">.</span>
            </h1>
-           <p className="text-xl text-gray-400 font-medium leading-relaxed max-w-[450px]">
+           <p className="text-xl text-gray-400 font-medium leading-relaxed max-w-112.5">
              Step into the future of social networking. Experience a premium, high-fidelity world where connections feel real and luxury is standard.
            </p>
            <div className="flex flex-wrap gap-4 pt-4 justify-center md:justify-start">

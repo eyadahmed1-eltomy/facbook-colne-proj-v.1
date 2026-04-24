@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../firebase/config';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { auth, provider, db } from '../firebase';
 
 const AuthContext = createContext(null);
 
@@ -87,22 +88,41 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = async () => {
     try {
-      // Use Firebase Authentication directly
+      // Sign in with Firebase
       const result = await signInWithPopup(auth, provider);
       const firebaseUser = result.user;
+
+      // Check if user already exists in Firestore
+      const userRef = doc(db, 'users', firebaseUser.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        // Create new user in Firestore
+        await setDoc(userRef, {
+          name: firebaseUser.displayName || firebaseUser.email.split('@')[0],
+          email: firebaseUser.email,
+          avatar: firebaseUser.photoURL || `https://api.dicebear.com/7.x/notionists/svg?seed=${firebaseUser.displayName || 'user'}`,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        });
+      }
 
       // Get Firebase ID token
       const idToken = await firebaseUser.getIdToken();
 
-      // Set user and authentication state with Firebase credentials
+      // Set user in state
+      const userData = userSnap.exists() ? userSnap.data() : {
+        name: firebaseUser.displayName || firebaseUser.email.split('@')[0],
+        email: firebaseUser.email,
+        avatar: firebaseUser.photoURL || `https://api.dicebear.com/7.x/notionists/svg?seed=${firebaseUser.displayName || 'user'}`,
+      };
+
       setUser({
         id: firebaseUser.uid,
-        email: firebaseUser.email,
-        name: firebaseUser.displayName || firebaseUser.email.split('@')[0],
-        avatar: firebaseUser.photoURL || `https://api.dicebear.com/7.x/notionists/svg?seed=${firebaseUser.displayName || 'user'}`,
+        ...userData
       });
 
-      // Store Firebase token instead of JWT
+      // Store Firebase token
       localStorage.setItem('velora_token', idToken);
       localStorage.setItem('velora_persist_login', 'true');
       setIsAuthenticated(true);
